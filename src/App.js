@@ -96,7 +96,6 @@ const App = () => {
     setComments(comments.filter((comment) => comment.id !== id));
   };
 
-
   return (
     <div className="container">
       <AddComment onAdd={addComment} />
