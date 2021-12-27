@@ -11,6 +11,7 @@ const App = () => {
     fetchComments();
   }, []);
     
+  const url  = "https://logward-assignment.herokuapp.com/comments";
 
   const handleSort=(sorting)=>{
     const finalCommentsAfterSort = [...comments];
@@ -27,7 +28,7 @@ const App = () => {
   //fetch Comments
 
   const fetchComments = async () => {
-    await fetch("http://localhost:5000/comments")
+    await fetch(url)
       .then((res) => res.json())
       .then((res) => setComments([...res].sort((a,b)=>new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())))
       .catch((err) => console.log(err));
@@ -43,7 +44,7 @@ const App = () => {
       createdAt: new Date(),
       responseTo: commentId || null,
     };
-    const res = await fetch("http://localhost:5000/comments", {
+    const res = await fetch(url, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -55,11 +56,10 @@ const App = () => {
   };
 
   //Edit Comment
-
   const editComment = async (updatedComment) => {
 
     const id = updatedComment.id;
-    const res = await fetch(`http://localhost:5000/comments/${id}`,{
+    const res = await fetch(`${url}/${id}`,{
       method: "PATCH",
       headers:{
         "Content-type": "application/json",
@@ -88,7 +88,7 @@ const App = () => {
     for(let i=0 ;i<commentToDelete.length; i++){
       const id = commentToDelete[i];
       console.log(id);
-      await fetch(`http://localhost:5000/comments/${id}`, {
+      await fetch(`${url}${id}`, {
       method: "DELETE",
     });
     }
