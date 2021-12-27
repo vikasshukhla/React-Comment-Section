@@ -11,11 +11,11 @@ body {
 }
 
 .container {
-  max-width: 700px;
+  max-width: 800px;
   margin: 30px auto;
   overflow: auto;
   min-height: 300px;
-  border: 1px solid steelblue;
+  border: none;
   padding: 30px;
   border-radius: 5px;
 }
@@ -28,7 +28,7 @@ body {
 }
 
 .btn {
-  display: inline-block;
+  display: block;
   background: rgb(5, 136, 212);
   color: #fff;
   border: none;
@@ -50,29 +50,42 @@ body {
 }
 
 .btn-block {
-  display: block;
-  width: 5rem;
+  display: inline;
+  float: right;
+  width: 20%;
 }
 
 .task {
   background: #f4f4f4;
-  margin: 10px;
-  padding: 10px 20px;
+  margin: 10px 10px;
+  padding: 20px 20px;
   /* cursor: pointer; */
-}
-
-.task.reminder {
-  border-left: 5px solid rgb(0, 173, 87);
 }
 
 .task h4 {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin: 0px 0px 10px;
+}
+
+.close-button{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0px 10px;
+}
+
+.close-button-style{
+  margin-right: -27px;
 }
 
 .form-section{
   background: #f4f4f4;
+  margin: 10px;
+  margin-bottom: 40px;
+  padding: 20px;
+  
 }
 
 .add-form {
@@ -80,7 +93,7 @@ body {
 }
 
 .form-control {
-  margin: 20px 0;
+  margin: 5px 0px;
 }
 
 .form-control label {
@@ -88,7 +101,8 @@ body {
 }
 
 .form-control input {
-  width: 90%;
+  border: none;
+  width: 100%;
   height: 40px;
   margin: 5px;
   padding: 3px 7px;
@@ -97,12 +111,6 @@ body {
 
 .form-control-comment input{
   height: 75px;
-}
-
-.form-control-check {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
 .form-control-check label {
@@ -114,7 +122,11 @@ body {
   height: 20px;
 }
 
-footer {
-  margin-top: 30px;
-  text-align: center;
+.Reply-Button{
+  background-color: transparent;
+  border: none;
+  margin: 10px 10px 0px 0px;
+  font-size: 18px;
+  color: rgb(5, 136, 212);
+  font-weight: bold;
 }

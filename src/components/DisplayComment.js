@@ -16,7 +16,7 @@ const DisplayComment = ({ comments, onDelete, onAdd, onEdit }) => {
                   onEdit={onEdit}
                 />
               </div>
-              <div style={{ paddingLeft: 15 }}>
+              <div style={{ paddingLeft: 50 }}>
                 {comments
                   .filter(
                     ({ responseTo }) =>
@@ -24,7 +24,7 @@ const DisplayComment = ({ comments, onDelete, onAdd, onEdit }) => {
                   )
                   .map((comment) => (
                     <>
-                      <div style={{ marginLeft: 5 }}>
+                      <div key={comment.id} style={{ marginLeft: 5 }}>
                         <Comment
                           comment={comment}
                           onDelete={onDelete}

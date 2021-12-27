@@ -39,6 +39,7 @@ const App = () => {
     setComments([...comments, finalData]);
   };
 
+  //Edit Comment
 
   const editComment = async (updatedComment) => {
 
@@ -50,17 +51,23 @@ const App = () => {
       },
       body: JSON.stringify({comment:updatedComment.commentText})
     })
+
     const commentData = await res.json();
     console.log(commentData);
-    // const commentData = [...comments];
-    // commentData.forEach((comment) => {
-    //   if (comment.id === updatedComment.id) {
-    //     comment.comment = updatedComment.commentText;
-    //   }
-    // });
-    setComments([...commentData]);
+
+    const allComments = [...comments];
+    for(let comment of allComments){
+      if (comment.id === id) {
+        comment.comment = commentData.comment;
+      }
+    }
+    console.log(allComments);
+    setComments(allComments); 
+
   };
 
+  // Delete Comment
+  
   const deleteComment = async (id) => {
     const commentToDelete = [id,...comments.filter(({responseTo})=>responseTo===id).map(({id})=>id)];
 
