@@ -23,7 +23,6 @@ const DisplayComment = ({ comments, onDelete, onAdd, onEdit }) => {
                       responseTo !== null && responseTo === comment.id
                   )
                   .map((comment) => (
-                    <>
                       <div key={comment.id} style={{ marginLeft: 5 }}>
                         <Comment
                           comment={comment}
@@ -31,7 +30,6 @@ const DisplayComment = ({ comments, onDelete, onAdd, onEdit }) => {
                           onEdit={onEdit}
                         />
                       </div>
-                    </>
                   ))}
               </div>
             </>

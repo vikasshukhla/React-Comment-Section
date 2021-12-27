@@ -55,11 +55,17 @@ body {
   width: 20%;
 }
 
+.sort{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
 .task {
+  position: relative;
   background: #f4f4f4;
   margin: 10px 10px;
   padding: 20px 20px;
-  /* cursor: pointer; */
 }
 
 .task h4 {
@@ -69,16 +75,12 @@ body {
   margin: 0px 0px 10px;
 }
 
-.close-button{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 10px 0px 10px;
+.Fatimes-button{
+  position: absolute;
+  right: -7px;
+  top: 50%;
 }
 
-.close-button-style{
-  margin-right: -27px;
-}
 
 .form-section{
   background: #f4f4f4;

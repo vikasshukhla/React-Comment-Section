@@ -1,20 +1,35 @@
 import { useState, useEffect } from "react";
+import {FaSortAmountUp,FaSortAmountDownAlt} from "react-icons/fa";
 import AddComment from "./components/AddComment";
 import DisplayComment from "./components/DisplayComment";
 
 const App = () => {
   const [comments, setComments] = useState([]);
+  const [sortBy, setSortBy] = useState('desc');
 
   useEffect(() => {
     fetchComments();
   }, []);
+    
+
+  const handleSort=(sorting)=>{
+    const finalCommentsAfterSort = [...comments];
+    if(sorting === 'asc'){
+      finalCommentsAfterSort.sort((a,b)=>new Date(a.createdAt).getTime()-new Date(b.createdAt).getTime());
+    }
+    if(sorting === 'desc'){
+      finalCommentsAfterSort.sort((a,b)=>new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+    }
+    setSortBy(sorting);
+    setComments(finalCommentsAfterSort);
+  }
 
   //fetch Comments
 
   const fetchComments = async () => {
     await fetch("http://localhost:5000/comments")
       .then((res) => res.json())
-      .then((res) => setComments([...res]))
+      .then((res) => setComments([...res].sort((a,b)=>new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())))
       .catch((err) => console.log(err));
   };
   
@@ -61,13 +76,12 @@ const App = () => {
         comment.comment = commentData.comment;
       }
     }
-    console.log(allComments);
     setComments(allComments); 
 
   };
 
   // Delete Comment
-  
+
   const deleteComment = async (id) => {
     const commentToDelete = [id,...comments.filter(({responseTo})=>responseTo===id).map(({id})=>id)];
 
@@ -82,9 +96,15 @@ const App = () => {
     setComments(comments.filter((comment) => comment.id !== id));
   };
 
+
   return (
     <div className="container">
       <AddComment onAdd={addComment} />
+      <div className="sort">
+        Sort By: Date and Time &nbsp;
+        {sortBy!=='asc' ? <FaSortAmountDownAlt onClick={()=>handleSort('asc')}/>:
+        <FaSortAmountUp onClick={()=>handleSort('desc')}/>}
+      </div>
       <DisplayComment
         comments={comments}
         onDelete={deleteComment}

@@ -41,12 +41,8 @@ const Comment = ({ comment, onDelete, onAdd, onEdit }) => {
             onChange={(e) => setCommentText(e.target.value)}
           ></input>
         ) : (
-          <p className="close-button">
+          <p className="close-Button">
             {comment.comment}{" "}
-            <FaTimes className="close-Button close-button-style"
-              style={{ color: "grey", cursor: "pointer" }}
-              onClick={() => onDelete(comment.id)}
-            />
           </p>
         )}
         {comment.responseTo === null && !isEdit ? (
@@ -54,6 +50,10 @@ const Comment = ({ comment, onDelete, onAdd, onEdit }) => {
         ) : (
           ""
         )}
+        <FaTimes className="Fatimes-button"
+            style={{ color: "grey", cursor: "pointer" }}
+            onClick={() => onDelete(comment.id)}
+        />
         <Button text={isEdit ? "Post" : "Edit"} onClick={handleIsEdit} />
         {isEdit && <Button text="Cancel" onClick={() => setIsEdit(false)} />}
       </div>
