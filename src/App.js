@@ -10,12 +10,15 @@ const App = () => {
   }, []);
 
   //fetch Comments
+
   const fetchComments = async () => {
     await fetch("http://localhost:5000/comments")
       .then((res) => res.json())
       .then((res) => setComments([...res]))
       .catch((err) => console.log(err));
   };
+  
+  //Add Comments
 
   const addComment = async (commentDetail) => {
     const { name, comment, commentId } = commentDetail;
@@ -25,7 +28,6 @@ const App = () => {
       createdAt: new Date(),
       responseTo: commentId || null,
     };
-
     const res = await fetch("http://localhost:5000/comments", {
       method: "POST",
       headers: {
@@ -37,14 +39,26 @@ const App = () => {
     setComments([...comments, finalData]);
   };
 
-  const editComment = (updatedComment) => {
-    const commentData = [...comments];
-    commentData.forEach((comment) => {
-      if (comment.id === updatedComment.id) {
-        comment.comment = updatedComment.commentText;
-      }
-    });
-    setComments(commentData);
+
+  const editComment = async (updatedComment) => {
+
+    const id = updatedComment.id;
+    const res = await fetch(`http://localhost:5000/comments/${id}`,{
+      method: "PATCH",
+      headers:{
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({comment:updatedComment.commentText})
+    })
+    const commentData = await res.json();
+    console.log(commentData);
+    // const commentData = [...comments];
+    // commentData.forEach((comment) => {
+    //   if (comment.id === updatedComment.id) {
+    //     comment.comment = updatedComment.commentText;
+    //   }
+    // });
+    setComments([...commentData]);
   };
 
   const deleteComment = async (id) => {
@@ -52,6 +66,7 @@ const App = () => {
 
     for(let i=0 ;i<commentToDelete.length; i++){
       const id = commentToDelete[i];
+      console.log(id);
       await fetch(`http://localhost:5000/comments/${id}`, {
       method: "DELETE",
     });

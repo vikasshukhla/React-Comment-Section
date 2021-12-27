@@ -14,6 +14,10 @@ const Comment = ({comment, onDelete, onAdd, onEdit}) => {
 
     const handleIsEdit=()=>{
         if(isEdit){
+            if(!commentText){
+                alert('Please Enter Comment !');
+                return;
+            }
             onEdit({id:comment.id, commentText});
             setIsEdit(false);
         }

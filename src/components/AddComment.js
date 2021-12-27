@@ -31,7 +31,7 @@ const AddComment = ({onAdd, commentId, closeCommentBox}) => {
             <h3>Comment</h3>
             <form className="add-form" onSubmit={onSubmit}>
                 <div className="form-control">
-                    <input 
+                    <input
                         type="text"
                         placeholder="Name"
                         value={name}
