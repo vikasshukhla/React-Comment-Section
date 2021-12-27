@@ -88,7 +88,7 @@ const App = () => {
     for(let i=0 ;i<commentToDelete.length; i++){
       const id = commentToDelete[i];
       console.log(id);
-      await fetch(`${url}${id}`, {
+      await fetch(`${url}/${id}`, {
       method: "DELETE",
     });
     }
