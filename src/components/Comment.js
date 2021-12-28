@@ -35,24 +35,28 @@ const Comment = ({ comment, onDelete, onAdd, onEdit }) => {
         </h4>
         {isEdit ? (
           <input
-            style={{ height: 75, width: "100%", fontSize: "17px" }}
+            style={{
+              height: 75,
+              width: "100%",
+              fontSize: "17px",
+              overflow: 'break-word',
+            }}
             type="text"
             value={commentText}
             onChange={(e) => setCommentText(e.target.value)}
           ></input>
         ) : (
-          <p className="close-Button">
-            {comment.comment}{" "}
-          </p>
+          <p className="close-Button">{comment.comment} </p>
         )}
         {comment.responseTo === null && !isEdit ? (
           <Button text="Reply" onClick={() => setShowReplyBox(!showReplyBox)} />
         ) : (
           ""
         )}
-        <FaTimes className="Fatimes-button"
-            style={{ color: "grey", cursor: "pointer" }}
-            onClick={() => onDelete(comment.id)}
+        <FaTimes
+          className="Fatimes-button"
+          style={{ color: "grey", cursor: "pointer" }}
+          onClick={() => onDelete(comment.id)}
         />
         <Button text={isEdit ? "Post" : "Edit"} onClick={handleIsEdit} />
         {isEdit && <Button text="Cancel" onClick={() => setIsEdit(false)} />}

@@ -3,7 +3,7 @@
     {
       "id": 1,
       "name": "Vikas",
-      "comment": "This is my first comment",
+      "comment": "This is my comment.",
       "createdAt": 1640529054660,
       "responseTo": null
     },
@@ -41,13 +41,6 @@
       "comment": "I'm rich",
       "createdAt": 1640529054660,
       "responseTo": null
-    },
-    {
-      "name": "Sachin",
-      "comment": "God of cricket . GOAT",
-      "createdAt": "2021-12-27T15:23:38.591Z",
-      "responseTo": null,
-      "id": 7
     }
   ]
 }

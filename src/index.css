@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
 
 * {
   box-sizing: border-box;
@@ -7,7 +7,7 @@
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 .container {
@@ -18,13 +18,6 @@ body {
   border: none;
   padding: 30px;
   border-radius: 5px;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
 }
 
 .btn {
@@ -52,10 +45,10 @@ body {
 .btn-block {
   display: inline;
   float: right;
-  width: 20%;
+  width:fit-content;
 }
 
-.sort{
+.sort {
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -75,19 +68,22 @@ body {
   margin: 0px 0px 10px;
 }
 
-.Fatimes-button{
+.task h4 p{
+  font-weight: lighter;
+  font-size: small;
+}
+
+.Fatimes-button {
   position: absolute;
   right: -7px;
   top: 50%;
 }
 
-
-.form-section{
+.form-section {
   background: #f4f4f4;
   margin: 10px;
   margin-bottom: 40px;
   padding: 20px;
-  
 }
 
 .add-form {
@@ -111,24 +107,15 @@ body {
   font-size: 17px;
 }
 
-.form-control-comment input{
+.form-control-comment input {
   height: 75px;
 }
 
-.form-control-check label {
-  flex: 1;
-}
-
-.form-control-check input {
-  flex: 2;
-  height: 20px;
-}
-
-.Reply-Button{
+.Reply-Button {
   background-color: transparent;
   border: none;
   margin: 10px 10px 0px 0px;
-  font-size: 18px;
+  font-size: 15px;
   color: rgb(5, 136, 212);
   font-weight: bold;
 }

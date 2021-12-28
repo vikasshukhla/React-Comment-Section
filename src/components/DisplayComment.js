@@ -23,13 +23,13 @@ const DisplayComment = ({ comments, onDelete, onAdd, onEdit }) => {
                       responseTo !== null && responseTo === comment.id
                   )
                   .map((comment) => (
-                      <div key={comment.id} style={{ marginLeft: 5 }}>
-                        <Comment
-                          comment={comment}
-                          onDelete={onDelete}
-                          onEdit={onEdit}
-                        />
-                      </div>
+                    <div key={comment.id} style={{ marginLeft: 5 }}>
+                      <Comment
+                        comment={comment}
+                        onDelete={onDelete}
+                        onEdit={onEdit}
+                      />
+                    </div>
                   ))}
               </div>
             </>

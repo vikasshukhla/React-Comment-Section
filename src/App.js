@@ -1,39 +1,52 @@
 import { useState, useEffect } from "react";
-import {FaSortAmountUp,FaSortAmountDownAlt} from "react-icons/fa";
+import { FaSortAmountUp, FaSortAmountDownAlt } from "react-icons/fa";
 import AddComment from "./components/AddComment";
 import DisplayComment from "./components/DisplayComment";
 
 const App = () => {
   const [comments, setComments] = useState([]);
-  const [sortBy, setSortBy] = useState('desc');
+  const [sortBy, setSortBy] = useState("desc");
 
   useEffect(() => {
     fetchComments();
   }, []);
-    
-  const url  = "https://logward-assignment.herokuapp.com/comments";
 
-  const handleSort=(sorting)=>{
+  const url = "https://logward-assignment.herokuapp.com/comments";
+
+  const handleSort = (sorting) => {
     const finalCommentsAfterSort = [...comments];
-    if(sorting === 'asc'){
-      finalCommentsAfterSort.sort((a,b)=>new Date(a.createdAt).getTime()-new Date(b.createdAt).getTime());
+    if (sorting === "asc") {
+      finalCommentsAfterSort.sort(
+        (a, b) =>
+          new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+      );
     }
-    if(sorting === 'desc'){
-      finalCommentsAfterSort.sort((a,b)=>new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+    if (sorting === "desc") {
+      finalCommentsAfterSort.sort(
+        (a, b) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      );
     }
     setSortBy(sorting);
     setComments(finalCommentsAfterSort);
-  }
+  };
 
   //fetch Comments
 
   const fetchComments = async () => {
     await fetch(url)
       .then((res) => res.json())
-      .then((res) => setComments([...res].sort((a,b)=>new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())))
+      .then((res) =>
+        setComments(
+          [...res].sort(
+            (a, b) =>
+              new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          )
+        )
+      )
       .catch((err) => console.log(err));
   };
-  
+
   //Add Comments
 
   const addComment = async (commentDetail) => {
@@ -56,43 +69,47 @@ const App = () => {
   };
 
   //Edit Comment
-  const editComment = async (updatedComment) => {
 
+  const editComment = async (updatedComment) => {
     const id = updatedComment.id;
-    const res = await fetch(`${url}/${id}`,{
+    const res = await fetch(`${url}/${id}`, {
       method: "PATCH",
-      headers:{
+      headers: {
         "Content-type": "application/json",
       },
-      body: JSON.stringify({comment:updatedComment.commentText})
-    })
+      body: JSON.stringify({ comment: updatedComment.commentText }),
+    });
 
     const commentData = await res.json();
-    console.log(commentData);
+    //console.log(commentData);
 
     const allComments = [...comments];
-    for(let comment of allComments){
+    for (let comment of allComments) {
       if (comment.id === id) {
         comment.comment = commentData.comment;
       }
     }
-    setComments(allComments); 
-
+    setComments(allComments);
   };
 
   // Delete Comment
 
   const deleteComment = async (id) => {
-    const commentToDelete = [id,...comments.filter(({responseTo})=>responseTo===id).map(({id})=>id)];
+    const commentToDelete = [
+      id,
+      ...comments
+        .filter(({ responseTo }) => responseTo === id)
+        .map(({ id }) => id),
+    ];
 
-    for(let i=0 ;i<commentToDelete.length; i++){
+    for (let i = 0; i < commentToDelete.length; i++) {
       const id = commentToDelete[i];
-      console.log(id);
+      //console.log(id);
       await fetch(`${url}/${id}`, {
-      method: "DELETE",
-    });
+        method: "DELETE",
+      });
     }
-    
+
     setComments(comments.filter((comment) => comment.id !== id));
   };
 
@@ -101,8 +118,11 @@ const App = () => {
       <AddComment onAdd={addComment} />
       <div className="sort">
         Sort By: Date and Time &nbsp;
-        {sortBy!=='asc' ? <FaSortAmountDownAlt onClick={()=>handleSort('asc')}/>:
-        <FaSortAmountUp onClick={()=>handleSort('desc')}/>}
+        {sortBy !== "asc" ? (
+          <FaSortAmountDownAlt onClick={() => handleSort("asc")} />
+        ) : (
+          <FaSortAmountUp onClick={() => handleSort("desc")} />
+        )}
       </div>
       <DisplayComment
         comments={comments}
